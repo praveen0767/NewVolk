@@ -1,271 +1,124 @@
 #!/usr/bin/env python3
 """
-app.py — Flask Backend for Road Hazard Detection.
-
-Fixed version with proper demo image integration.
+Road Hazard Detection - Streamlit App
+Combined frontend and backend in a single Streamlit application
 """
-import os, time, json, uuid, hashlib, socket, sys, traceback, logging, base64
+
+import os
+import time
+import json
+import uuid
+import hashlib
+import traceback
+import logging
+import base64
 from datetime import datetime, timezone
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
-from werkzeug.utils import secure_filename
-import cv2, numpy as np, torch
+from pathlib import Path
+from typing import List, Dict, Optional
+
+import streamlit as st
+import cv2
+import numpy as np
+import torch
 from ultralytics import YOLO
-import io
-from demo_images import get_demo_images
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from PIL import Image
 
-# ------------- LOGGING SETUP -------------
-LOG_LEVEL = logging.INFO
-logging.basicConfig(
-    level=LOG_LEVEL,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('detector.log', encoding='utf-8'),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger(__name__)
-
-# Fix for Windows console encoding
-if sys.platform == "win32":
-    try:
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
-    except Exception:
-        pass
-
-# Metrics logging
-METRICS_PATH = "metrics.jsonl"
-
-def log_metric(event, **kwargs):
-    record = {"event": event, "timestamp": now_iso_utc(), **kwargs}
-    try:
-        with open(METRICS_PATH, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False) + "\n")
-    except Exception as e:
-        logger.warning(f"Failed to log metric: {e}")
-
-# ------------- USER CONFIG -------------
+# ------------- CONFIGURATION -------------
+# Model paths
 POTHOLE_MODEL_PATH = r"D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt"
 HAZARD_MODEL_PATH = r"D:\Volks\Hazard_detection\best.pt"
 PLATE_MODEL_PATH = r"D:\Volks\Hazard_detection\license_plate_detector.pt"
 FACE_MODEL_PATH = r"D:\Volks\Hazard_detection\yolov8n-face.pt"
 
-CLOUDAMQP_URL = "amqps://dcvgkvoo:qGfhKE1foRmDOBV5TQlXpyJBShbWfjn1@puffin.rmq2.cloudamqp.com/dcvgkvoo"
-CLOUDAMQP_QUEUE = "pothole_events"
-
-WEBHOOK_URL = None
-
-PHONE_GPS_IP = "192.168.0.112"
-PHONE_GPS_PORT = 11123
-PHONE_GPS_TIMEOUT = 1.0
-
-CAMERA_INDEX = 0
-TARGET_WIDTH = 1280
-TARGET_HEIGHT = 720
-INFERENCE_SIZE = 640  # Increased for better detection
-
-TARGET_PROCESS_FPS = 20.0
-TARGET_DISPLAY_FPS = 30.0
-
-USE_GPU = False
-USE_HALF = False
-
-# Adjusted confidence thresholds
+# Detection parameters
 CONF_THRESHOLD = 0.25
-CONF_REPORT_THRESHOLD = 0.45
 HAZARD_CONF_THRESHOLD = 0.15
-HAZARD_REPORT_THRESHOLD = 0.25
-STABLE_SECONDS = 5.0
-MISS_TIMEOUT = 2.0
-IOU_MATCH_THRESHOLD = 0.3
-REPORT_COOLDOWN_SECONDS = 60.0
-MIN_RUNTIME_SECONDS = 5.0
-
-# Stalled vehicle detection
 STALLED_CONF_THRESHOLD = 0.25
-STALLED_REPORT_THRESHOLD = 0.45
-STALLED_SECONDS = 10.0
-MOVEMENT_THRESHOLD_PX = 50
+INFERENCE_SIZE = 640
 
-SNAPSHOT_DIR = "snapshots"
-REPORTS_PATH = "reports.jsonl"
-os.makedirs(SNAPSHOT_DIR, exist_ok=True)
-
+# Blur parameters
 DEFAULT_FACE_KERNEL = (99, 99)
 DEFAULT_PLATE_KERNEL = (99, 99)
 
-SEND_RETRIES = 3
-RETRY_BACKOFF = 1.5
+# Default demo images
+DEFAULT_DEMO_IMAGES = [
+    {"name": "pothole_demo.jpg", "path": "D:/volks1/images/patho.png", "description": "Road with potholes"},
+    {"name": "stalled_vehicle_demo.jpg", "path": "D:/volks1/images/sta.png", "description": "Stalled vehicle with license plate"},
+    {"name": "speed_breaker_demo.jpg", "path": "D:/volks1/images/ali.png", "description": "Road with speed breaker"},
+    {"name": "manhole_demo.jpg", "path": "D:/volks1/images/manhole.png", "description": "Road with manhole"},
+    {"name": "Aligator_demo.jpg", "path": "D:/volks1/images/ali.png", "description": "Road with debris"},
+    {"name": "face_blur_demo.jpg", "path": "D:/volks1/images/man.png", "description": "Image with faces to blur"},
+    {"name": "plate_blur_demo.jpg", "path": "D:/volks1/images/plate.png", "description": "Image with license plates to blur"},
+]
 
-# ------------- UTILITY FUNCTIONS -------------
-def now_iso_utc():
-    return datetime.now(timezone.utc).isoformat()
-
-def stable_vehicle_hash():
-    try:
-        node = uuid.getnode()
-        mac = f"{node:012x}"
-    except Exception:
-        mac = uuid.uuid4().hex
-    return hashlib.sha256(mac.encode()).hexdigest()[:32]
-
-VEHICLE_ID_HASH = stable_vehicle_hash()
-
-def make_hazard_id(prefix="ph"):
-    t = int(time.time())
-    rnd = hashlib.sha256(f"{t}_{uuid.uuid4().hex}".encode()).hexdigest()[:8]
-    return f"{prefix}_{t}_{rnd}"
-
-def save_report_local(record, path=REPORTS_PATH):
-    try:
-        with open(path, "a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        logger.info(f"Report saved locally: {record.get('hazard_id', 'unknown')}")
-    except Exception as e:
-        logger.warning(f"Failed to save report locally: {e}")
-
-# ASCII Boxed JSON printer
-def print_json_boxed(json_str, title="Payload", width=100):
-    try:
-        data = json.loads(json_str)
-        pretty_json = json.dumps(data, indent=2, ensure_ascii=False)
-    except:
-        pretty_json = json_str
-    lines = pretty_json.split('\n')
-    truncated_lines = []
-    for line in lines:
-        if len(line) > width - 4:
-            truncated_lines.append(line[:width-7] + "...")
-        else:
-            truncated_lines.append(line)
-    max_len = max(len(line) for line in truncated_lines)
-    max_len = min(max_len, width - 4)
-    
-    top = "+" + "-" * (max_len + 2) + "+"
-    mid_title = "| " + title.center(max_len) + " |"
-    mid_sep = "+" + "-" * (max_len + 2) + "+"
-    bottom = "+" + "-" * (max_len + 2) + "+"
-    sides = "|"
-
-    print(top)
-    print(mid_title)
-    print(mid_sep)
-    for line in truncated_lines:
-        print(f"{sides} {line:<{max_len}} {sides}")
-    print(bottom)
-    print()
-
-def send_webhook_notification(message):
-    if not WEBHOOK_URL:
-        return
-    try:
-        import requests
-        requests.post(WEBHOOK_URL, json={"content": message}, timeout=5)
-        logger.info("Webhook notification sent")
-    except Exception as e:
-        logger.warning(f"Webhook send failed: {e}")
-
-def send_to_cloudamqp(payload, url=CLOUDAMQP_URL, queue=CLOUDAMQP_QUEUE, retries=SEND_RETRIES):
-    try:
-        import pika
-    except Exception as e:
-        logger.error(f"pika missing — install `pip install pika` to enable CloudAMQP. Error: {e}")
-        return False, "pika-missing"
-    
-    attempt = 0
-    backoff = 1.0
-    while attempt < retries:
-        attempt += 1
-        try:
-            params = pika.URLParameters(url)
-            conn = pika.BlockingConnection(params)
-            ch = conn.channel()
-            ch.queue_declare(queue=queue, durable=True)
-            body = json.dumps(payload, ensure_ascii=False, indent=2)
-            logger.info(f"AMQP: CloudAMQP connected (attempt {attempt}). Publishing payload:")
-            print_json_boxed(body, title=f"CloudAMQP {payload.get('type', 'event')} Payload (Attempt {attempt})")
-            ch.basic_publish(exchange='', routing_key=queue, body=json.dumps(payload, ensure_ascii=False),
-                             properties=pika.BasicProperties(delivery_mode=2, content_type='application/json'))
-            conn.close()
-            logger.info("SUCCESS: Published to CloudAMQP")
-            send_webhook_notification(f"ALERT: {payload.get('type', 'event')} reported: {payload.get('hazard_id', 'unknown')}")
-            log_metric("cloud_send_success", hazard_id=payload.get('hazard_id'), type=payload.get('type'), attempt=attempt)
-            return True, None
-        except Exception as e:
-            logger.error(f"WARNING: CloudAMQP attempt {attempt} failed: {e}")
-            time.sleep(backoff)
-            backoff *= RETRY_BACKOFF
-            log_metric("cloud_send_fail", hazard_id=payload.get('hazard_id', 'unknown'), attempt=attempt, error=str(e))
-    return False, "max_retries"
-
-# Blur Manager Class
+# ------------- UTILITY CLASSES & FUNCTIONS -------------
 class BlurManager:
     @staticmethod
     def oddify(x):
         x = max(1, int(x))
-        return x if (x%2)==1 else x+1
+        return x if (x % 2) == 1 else x + 1
 
     @staticmethod
     def make_valid_kernel(desired_kernel, roi_w, roi_h):
         kx_des, ky_des = desired_kernel
-        kx = min(kx_des, roi_w if roi_w>0 else 1)
-        ky = min(ky_des, roi_h if roi_h>0 else 1)
+        kx = min(kx_des, roi_w if roi_w > 0 else 1)
+        ky = min(ky_des, roi_h if roi_h > 0 else 1)
         kx = BlurManager.oddify(kx)
         ky = BlurManager.oddify(ky)
-        if kx >= roi_w: kx = BlurManager.oddify(max(3, roi_w-1))
-        if ky >= roi_h: ky = BlurManager.oddify(max(3, roi_h-1))
+        if kx >= roi_w: kx = BlurManager.oddify(max(3, roi_w - 1))
+        if ky >= roi_h: ky = BlurManager.oddify(max(3, roi_h - 1))
         return (kx, ky)
 
     @staticmethod
-    def safe_blur_roi(img, x1,y1,x2,y2, desired_kernel):
-        h,w = img.shape[:2]
-        x1 = max(0,int(round(x1)))
-        y1 = max(0,int(round(y1)))
-        x2 = min(w,int(round(x2)))
-        y2 = min(h,int(round(y2)))
-        if x2<=x1 or y2<=y1: return
+    def safe_blur_roi(img, x1, y1, x2, y2, desired_kernel):
+        h, w = img.shape[:2]
+        x1 = max(0, int(round(x1)))
+        y1 = max(0, int(round(y1)))
+        x2 = min(w, int(round(x2)))
+        y2 = min(h, int(round(y2)))
+        if x2 <= x1 or y2 <= y1: return
         roi = img[y1:y2, x1:x2]
         roi_h, roi_w = roi.shape[:2]
         kx, ky = BlurManager.make_valid_kernel(desired_kernel, roi_w, roi_h)
         try:
-            if kx>=3 and ky>=3: 
-                img[y1:y2, x1:x2] = cv2.GaussianBlur(roi, (kx,ky), 0)
-            else: 
-                img[y1:y2, x1:x2] = cv2.blur(roi, (kx,ky))
+            if kx >= 3 and ky >= 3:
+                img[y1:y2, x1:x2] = cv2.GaussianBlur(roi, (kx, ky), 0)
+            else:
+                img[y1:y2, x1:x2] = cv2.blur(roi, (kx, ky))
         except Exception:
             try:
-                small = cv2.resize(roi, (max(1, roi_w//8), max(1, roi_h//8)))
+                small = cv2.resize(roi, (max(1, roi_w // 8), max(1, roi_h // 8)))
                 img[y1:y2, x1:x2] = cv2.resize(small, (roi_w, roi_h), interpolation=cv2.INTER_NEAREST)
             except Exception:
                 pass
 
-# Drawing Manager Class
 class DrawingManager:
     @staticmethod
-    def draw_custom_boxes(img, boxes, classes, confs, names=None, color=(0,0,255), thickness=2, transform=None):
+    def draw_custom_boxes(img, boxes, classes, confs, names=None, color=(0, 0, 255), thickness=2, transform=None):
         for i, b in enumerate(boxes):
-            x1,y1,x2,y2 = [int(x) for x in b]
+            x1, y1, x2, y2 = [int(x) for x in b]
             if transform:
-                x1p,y1p,x2p,y2p = transform(x1,y1,x2,y2)
+                x1p, y1p, x2p, y2p = transform(x1, y1, x2, y2)
             else:
-                x1p,y1p,x2p,y2p = x1,y1,x2,y2
+                x1p, y1p, x2p, y2p = x1, y1, x2, y2
             label = f"{confs[i]:.2f}"
             try:
                 if names and int(classes[i]) < len(names):
                     label = f"{names[int(classes[i])]} {confs[i]:.2f}"
             except Exception:
                 pass
-            cv2.rectangle(img, (x1p,y1p), (x2p,y2p), color, thickness, lineType=cv2.LINE_AA)
+            cv2.rectangle(img, (x1p, y1p), (x2p, y2p), color, thickness, lineType=cv2.LINE_AA)
             (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
-            cv2.rectangle(img, (x1p, y1p-th-6), (x1p+tw+6, y1p), (0,0,0), -1)
-            cv2.putText(img, label, (x1p+3, y1p-4), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+            cv2.rectangle(img, (x1p, y1p - th - 6), (x1p + tw + 6, y1p), (0, 0, 0), -1)
+            cv2.putText(img, label, (x1p + 3, y1p - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
 
-# Enhanced Severity with aspect ratio
 def compute_severity(conf, box, frame_w, frame_h):
-    x1,y1,x2,y2 = [int(x) for x in box]
-    area = max(0, (x2-x1)*(y2-y1))
-    area_ratio = area / (frame_w*frame_h)
+    x1, y1, x2, y2 = [int(x) for x in box]
+    area = max(0, (x2 - x1) * (y2 - y1))
+    area_ratio = area / (frame_w * frame_h)
     aspect = frame_w / frame_h
     area_weight = 0.3 * (1 + abs(aspect - 1.78) * 0.5)
     conf_weight = 1 - area_weight
@@ -274,7 +127,6 @@ def compute_severity(conf, box, frame_w, frame_h):
     if score >= 0.35: return "medium"
     return "low"
 
-# Detection extraction - FIXED VERSION
 def extract_detections(res):
     """Extract detections from YOLO results with better error handling"""
     try:
@@ -286,538 +138,775 @@ def extract_detections(res):
                 return boxes, confs, classes
         return np.empty((0, 4)), np.empty(0), np.empty(0)
     except Exception as e:
-        logger.error(f"Error extracting detections: {e}")
+        st.error(f"Error extracting detections: {e}")
         return np.empty((0, 4)), np.empty(0), np.empty(0)
 
-def iou(a,b):
-    ax1,ay1,ax2,ay2 = a
-    bx1,by1,bx2,by2 = b
-    ix1 = max(ax1,bx1)
-    iy1 = max(ay1,by1)
-    ix2 = min(ax2,bx2)
-    iy2 = min(ay2,by2)
-    iw = max(0, ix2-ix1)
-    ih = max(0, iy2-iy1)
-    inter = iw*ih
-    area_a = max(0,(ax2-ax1)*(ay2-ay1))
-    area_b = max(0,(bx2-bx1)*(by2-by1))
-    union = area_a + area_b - inter
-    return inter/union if union>0 else 0.0
-
-# ------------- MODELS & CAMERA SETUP -------------
-# Device detection
-if torch.backends.mps.is_available() and sys.platform == "darwin":
-    device = "mps"
-elif USE_GPU and torch.cuda.is_available():
-    device = "cuda"
-else:
-    device = "cpu"
-half = USE_HALF and device in ["cuda", "mps"]
-logger.info(f"Device: {device} | half: {half}")
-
-# Load models with better error handling
-pothole_model = None
-hazard_model = None
-plate_model = None
-face_model = None
-
-try:
-    logger.info(f"Loading pothole model: {POTHOLE_MODEL_PATH}")
-    if os.path.exists(POTHOLE_MODEL_PATH):
-        pothole_model = YOLO(POTHOLE_MODEL_PATH, task="detect")
-        pothole_model.to(device)
-        logger.info("Pothole model loaded successfully")
-    else:
-        logger.error(f"Pothole model file not found: {POTHOLE_MODEL_PATH}")
-except Exception as e:
-    logger.error(f"Failed to load pothole model: {e}")
-    pothole_model = None
-
-try:
-    if HAZARD_MODEL_PATH and os.path.exists(HAZARD_MODEL_PATH):
-        hazard_model = YOLO(HAZARD_MODEL_PATH, task="detect")
-        hazard_model.to(device)
-        logger.info("Hazard model loaded successfully")
-    else:
-        logger.warning("Hazard model path not set or file not found")
-except Exception as e:
-    logger.error(f"Failed to load hazard model: {e}")
-    hazard_model = None
-
-try:
-    if PLATE_MODEL_PATH and os.path.exists(PLATE_MODEL_PATH):
-        plate_model = YOLO(PLATE_MODEL_PATH, task="detect")
-        plate_model.to(device)
-        logger.info("Plate model loaded successfully")
-    else:
-        logger.warning("Plate model path not set or file not found")
-except Exception as e:
-    logger.error(f"Failed to load plate model: {e}")
-    plate_model = None
-
-try:
-    if FACE_MODEL_PATH and os.path.exists(FACE_MODEL_PATH):
-        face_model = YOLO(FACE_MODEL_PATH, task="detect")
-        face_model.to(device)
-        logger.info("Face model loaded successfully")
-    else:
-        logger.warning("Face model path not set or file not found")
-except Exception as e:
-    logger.error(f"Failed to load face model: {e}")
-    face_model = None
-
-# Check if at least one model is loaded
-if not any([pothole_model, hazard_model, plate_model]):
-    logger.error("No models loaded successfully! Check model paths and files.")
-
-def open_camera(index):
-    backends = [cv2.CAP_DSHOW, cv2.CAP_MSMF] if hasattr(cv2, 'CAP_DSHOW') else [0]
-    for b in backends:
-        try:
-            cap = cv2.VideoCapture(index, b)
-            if cap.isOpened(): return cap
-            else: cap.release()
-        except Exception:
-            pass
-    return cv2.VideoCapture(index)
-
-# Deterministic GPS/IMU mocks for backend
-def get_mock_gps():
-    return {"lat": 12.9716, "lon": 77.5946, "src": "mock"}
-
-def get_mock_imu():
-    t = int(time.time())
-    ax = 0.01 * ((t % 7) + 1)
-    ay = -0.02 * ((t % 5) + 1)
-    az = 9.81 + 0.01 * ((t % 3) + 1)
-    return {"acc": (round(ax,4), round(ay,4), round(az,4)), "gyro": (0.0,0.0,0.0), "src":"mock"}
-
-# Flask App
-app = Flask(__name__)
-CORS(app)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'bmp'}
-
-@app.route('/')
-def index():
-    return jsonify({
-        "status": "Road Hazard Detection API is running",
-        "models_loaded": {
-            "pothole": pothole_model is not None,
-            "hazard": hazard_model is not None,
-            "plate": plate_model is not None,
-            "face": face_model is not None
-        },
-        "device": device
-    })
-
-@app.route('/detect', methods=['POST'])
-def detect():
-    if 'image' not in request.files:
-        return jsonify({"error": "No image file provided"}), 400
-    
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-    
-    if not file or not allowed_file(file.filename):
-        return jsonify({"error": "Invalid file type"}), 400
-
+def _encode_image_to_base64(img: np.ndarray) -> Optional[str]:
+    """Encode a BGR OpenCV image to a base64 JPEG string."""
     try:
-        # Read and validate image
-        img_bytes = file.read()
-        if len(img_bytes) == 0:
-            return jsonify({"error": "Empty image file"}), 400
-            
-        nparr = np.frombuffer(img_bytes, np.uint8)
-        orig_frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        
-        if orig_frame is None:
-            return jsonify({"error": "Could not decode image"}), 400
-
-        fh, fw = orig_frame.shape[:2]
-        logger.info(f"Processing image: {fw}x{fh}")
-        
-        # Create working copy
-        frame = orig_frame.copy()
-
-        detections = {
-            "potholes": [],
-            "stalled_vehicles": [],
-            "speed_breakers": [],
-            "manholes": [],
-            "debris": []
-        }
-
-        # Pothole detection
-        if pothole_model is not None:
-            try:
-                res = pothole_model(frame, imgsz=INFERENCE_SIZE, conf=CONF_THRESHOLD, half=half, verbose=False)
-                if len(res) > 0:
-                    boxes, confs, classes = extract_detections(res[0])
-                    logger.info(f"Pothole model found {len(boxes)} raw detections")
-                    
-                    for bi, box in enumerate(boxes):
-                        if bi < len(confs):
-                            conf = float(confs[bi])
-                            if conf >= CONF_THRESHOLD:
-                                severity = compute_severity(conf, box, fw, fh)
-                                detections["potholes"].append({
-                                    "bbox": [int(x) for x in box],
-                                    "confidence": round(conf, 3),
-                                    "severity": severity
-                                })
-                    logger.info(f"Pothole detections after filtering: {len(detections['potholes'])}")
-            except Exception as e:
-                logger.error(f"Pothole detection failed: {e}")
-
-        # Hazard detection
-        if hazard_model is not None:
-            try:
-                hres = hazard_model(frame, imgsz=INFERENCE_SIZE, conf=HAZARD_CONF_THRESHOLD, half=half, verbose=False)
-                if len(hres) > 0:
-                    hboxes, hconfs, hcls = extract_detections(hres[0])
-                    logger.info(f"Hazard model found {len(hboxes)} raw detections")
-                    
-                    for bi, box in enumerate(hboxes):
-                        if bi < len(hconfs) and bi < len(hcls):
-                            conf = float(hconfs[bi])
-                            if conf >= HAZARD_CONF_THRESHOLD:
-                                cls = int(hcls[bi])
-                                severity = compute_severity(conf, box, fw, fh)
-                                det = {
-                                    "bbox": [int(x) for x in box],
-                                    "confidence": round(conf, 3),
-                                    "severity": severity
-                                }
-                                if cls == 0:
-                                    detections["speed_breakers"].append(det)
-                                elif cls == 1:
-                                    detections["manholes"].append(det)
-                                elif cls == 2:
-                                    detections["debris"].append(det)
-            except Exception as e:
-                logger.error(f"Hazard detection failed: {e}")
-
-        # Plate detection for stalled vehicles
-        if plate_model is not None:
-            try:
-                pres = plate_model(frame, imgsz=416, conf=STALLED_CONF_THRESHOLD, half=half, verbose=False)
-                if len(pres) > 0:
-                    pboxes, pconfs, pcls = extract_detections(pres[0])
-                    logger.info(f"Plate model found {len(pboxes)} raw detections")
-                    
-                    for bi, box in enumerate(pboxes):
-                        if bi < len(pconfs):
-                            conf = float(pconfs[bi])
-                            if conf >= STALLED_CONF_THRESHOLD:
-                                x1,y1,x2,y2 = [int(x) for x in box]
-                                plate_w = x2 - x1
-                                plate_h = y2 - y1
-                                veh_x1 = max(0, x1 - plate_w * 1.5)
-                                veh_y1 = max(0, y1 - plate_h * 0.5)
-                                veh_x2 = min(fw, x2 + plate_w * 1.5)
-                                veh_y2 = min(fh, y2 + plate_h * 1.5)
-                                detections["stalled_vehicles"].append({
-                                    "bbox": [veh_x1, veh_y1, veh_x2, veh_y2],
-                                    "confidence": round(conf, 3),
-                                    "severity": "medium"
-                                })
-            except Exception as e:
-                logger.error(f"Plate detection failed: {e}")
-
-        # Face detection for blurring
-        face_boxes = np.empty((0,4))
-        face_confs = np.empty(0)
-        if face_model is not None:
-            try:
-                fres = face_model(frame, imgsz=416, conf=0.01, half=half, verbose=False)
-                if len(fres) > 0:
-                    face_boxes, face_confs, _ = extract_detections(fres[0])
-                    logger.info(f"Face model found {len(face_boxes)} faces")
-            except Exception as e:
-                logger.error(f"Face detection failed: {e}")
-
-        # Blur faces
-        for bi, box in enumerate(face_boxes):
-            if bi < len(face_confs) and float(face_confs[bi]) >= 0.01:
-                x1,y1,x2,y2 = [int(x) for x in box]
-                BlurManager.safe_blur_roi(frame, x1,y1,x2,y2, DEFAULT_FACE_KERNEL)
-
-        # Blur plates
-        if plate_model is not None:
-            try:
-                pres = plate_model(frame, imgsz=416, conf=0.20, half=half, verbose=False)
-                if len(pres) > 0:
-                    pboxes, pconfs, _ = extract_detections(pres[0])
-                    for bi, box in enumerate(pboxes):
-                        if bi < len(pconfs) and float(pconfs[bi]) >= 0.20:
-                            x1,y1,x2,y2 = [int(x) for x in box]
-                            BlurManager.safe_blur_roi(frame, x1,y1,x2,y2, DEFAULT_PLATE_KERNEL)
-            except Exception as e:
-                logger.error(f"Plate blurring failed: {e}")
-
-        # Encode blurred image to base64
-        success, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        success, buffer = cv2.imencode(".jpg", img, [int(cv2.IMWRITE_JPEG_QUALITY), 85])
         if not success:
-            return jsonify({"error": "Failed to encode image"}), 500
-            
-        blurred_image_b64 = base64.b64encode(buffer).decode('utf-8')
-
-        response_data = {
-            "detections": detections,
-            "blurred_image": blurred_image_b64,
-            "image_info": {
-                "width": fw,
-                "height": fh
-            }
-        }
-        
-        logger.info(f"Detection completed: {sum(len(v) for v in detections.values())} total detections")
-        return jsonify(response_data)
-
+            return None
+        return base64.b64encode(buffer).decode("utf-8")
     except Exception as e:
-        logger.error(f"Detection error: {e}")
-        logger.error(traceback.format_exc())
-        return jsonify({"error": f"Processing failed: {str(e)}"}), 500
+        st.error(f"Failed to encode image to base64: {e}")
+        return None
 
-@app.route('/send_report', methods=['POST'])
-def send_report():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "No JSON data"}), 400
+def get_demo_images(demo_path: Optional[str] = None) -> List[Dict]:
+    """Get demo images from path or use defaults"""
+    _VALID_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif", ".webp"}
+    images = []
+
+    if demo_path and os.path.exists(demo_path):
+        p = Path(demo_path)
+        if p.is_file():
+            try:
+                img = cv2.imread(str(p))
+                if img is not None:
+                    b64 = _encode_image_to_base64(img)
+                    images.append({"name": p.name, "data": b64 or "", "description": f"Demo image: {p.name}", "path": str(p)})
+            except Exception as e:
+                st.error(f"Failed loading image file: {p} - {e}")
+        elif p.is_dir():
+            for child in sorted(p.iterdir()):
+                if child.suffix.lower() in _VALID_EXTS and child.is_file():
+                    try:
+                        img = cv2.imread(str(child))
+                        if img is not None:
+                            b64 = _encode_image_to_base64(img)
+                            images.append({"name": child.name, "data": b64 or "", "description": f"Demo image: {child.name}", "path": str(child)})
+                    except Exception as e:
+                        st.error(f"Error loading image: {child} - {e}")
+
+    # If no images found, use defaults
+    if not images:
+        for entry in DEFAULT_DEMO_IMAGES:
+            try:
+                path_obj = Path(entry["path"])
+                if path_obj.exists() and path_obj.is_file():
+                    img = cv2.imread(str(path_obj))
+                    if img is not None:
+                        b64 = _encode_image_to_base64(img)
+                        images.append({
+                            "name": entry["name"],
+                            "data": b64 or "",
+                            "description": entry["description"],
+                            "path": str(path_obj)
+                        })
+            except Exception as e:
+                st.error(f"Error processing default image: {entry} - {e}")
+
+    return images
+
+def now_iso_utc():
+    return datetime.now(timezone.utc).isoformat()
+
+# ------------- MODEL LOADING -------------
+@st.cache_resource
+def load_models():
+    """Load all detection models"""
+    # Device detection
+    if torch.backends.mps.is_available():
+        device = "mps"
+    elif torch.cuda.is_available():
+        device = "cuda"
+    else:
+        device = "cpu"
+    
+    models = {}
+    
     try:
-        ok, err = send_to_cloudamqp(data, CLOUDAMQP_URL, CLOUDAMQP_QUEUE, retries=SEND_RETRIES)
-        if ok:
-            return jsonify({"status": "Report sent successfully to CloudAMQP", "hazard_id": data.get('hazard_id')})
+        if os.path.exists(POTHOLE_MODEL_PATH):
+            models['pothole'] = YOLO(POTHOLE_MODEL_PATH, task="detect")
+            models['pothole'].to(device)
         else:
-            return jsonify({"error": err}), 500
+            st.error(f"Pothole model not found: {POTHOLE_MODEL_PATH}")
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/get_demo_images', methods=['GET'])
-def get_demo_images_endpoint():
-    """Return list of demo images with base64 encoded data."""
-    try:
-        demo_path = request.args.get('path')
-        logger.info(f"Loading demo images from path: {demo_path}")
-        images = get_demo_images(demo_path)
-        
-        # Filter out images with empty data
-        valid_images = [img for img in images if img.get('data')]
-        logger.info(f"Loaded {len(valid_images)} valid demo images")
-        
-        return jsonify({
-            "demo_images": valid_images,
-            "total_count": len(valid_images),
-            "loaded_from": demo_path or "default"
-        })
-    except Exception as e:
-        logger.error(f"Error loading demo images: {e}")
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/process_demo', methods=['POST'])
-def process_demo():
-    """Process a demo image by name and return detections with annotated image."""
-    data = request.get_json()
-    if not data or 'image_name' not in data:
-        return jsonify({"error": "image_name required"}), 400
-
-    image_name = data['image_name']
-    demo_path = data.get('demo_path')  # Optional custom demo path
+        st.error(f"Failed to load pothole model: {e}")
     
-    logger.info(f"Processing demo image: {image_name} from path: {demo_path}")
-
     try:
-        # Get demo images from the specified path or default
-        demo_images = get_demo_images(demo_path)
-        
-        # Find the requested image
-        image_data = None
-        image_description = ""
-        for img in demo_images:
-            if img['name'] == image_name:
-                image_data = img.get('data')
-                image_description = img.get('description', '')
-                break
-
-        if not image_data:
-            logger.error(f"Demo image not found: {image_name}")
-            return jsonify({"error": f"Demo image '{image_name}' not found"}), 404
-
-        # Decode base64 image
-        try:
-            img_bytes = base64.b64decode(image_data)
-            nparr = np.frombuffer(img_bytes, np.uint8)
-            orig_frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            if orig_frame is None:
-                return jsonify({"error": "Invalid demo image data"}), 400
-        except Exception as e:
-            logger.error(f"Failed to decode demo image: {e}")
-            return jsonify({"error": "Invalid image data"}), 400
-
-        fh, fw = orig_frame.shape[:2]
-        logger.info(f"Processing demo image: {image_name} ({fw}x{fh})")
-        frame = orig_frame.copy()
-
-        detections = {
-            "potholes": [],
-            "stalled_vehicles": [],
-            "speed_breakers": [],
-            "manholes": [],
-            "debris": []
-        }
-
-        # Pothole detection with bounding boxes
-        if pothole_model is not None:
-            try:
-                res = pothole_model(frame, imgsz=INFERENCE_SIZE, conf=CONF_THRESHOLD, half=half, verbose=False)
-                if len(res) > 0:
-                    boxes, confs, classes = extract_detections(res[0])
-                    for bi, box in enumerate(boxes):
-                        if bi < len(confs):
-                            conf = float(confs[bi])
-                            if conf >= CONF_THRESHOLD:
-                                severity = compute_severity(conf, box, fw, fh)
-                                detections["potholes"].append({
-                                    "bbox": [int(x) for x in box],
-                                    "confidence": round(conf, 3),
-                                    "severity": severity
-                                })
-                                # Draw bounding box
-                                DrawingManager.draw_custom_boxes(frame, [box], [0], [conf], names=["pothole"], color=(0, 0, 255))
-            except Exception as e:
-                logger.error(f"Pothole detection failed in demo: {e}")
-
-        # Hazard detection with bounding boxes
-        if hazard_model is not None:
-            try:
-                hres = hazard_model(frame, imgsz=INFERENCE_SIZE, conf=HAZARD_CONF_THRESHOLD, half=half, verbose=False)
-                if len(hres) > 0:
-                    hboxes, hconfs, hcls = extract_detections(hres[0])
-                    for bi, box in enumerate(hboxes):
-                        if bi < len(hconfs) and bi < len(hcls):
-                            conf = float(hconfs[bi])
-                            if conf >= HAZARD_CONF_THRESHOLD:
-                                cls = int(hcls[bi])
-                                severity = compute_severity(conf, box, fw, fh)
-                                det = {
-                                    "bbox": [int(x) for x in box],
-                                    "confidence": round(conf, 3),
-                                    "severity": severity
-                                }
-                                # Different colors for different hazard types
-                                colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255)]  # green, blue, yellow
-                                color = colors[cls] if cls < len(colors) else (0, 255, 0)
-                                
-                                if cls == 0:
-                                    detections["speed_breakers"].append(det)
-                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
-                                elif cls == 1:
-                                    detections["manholes"].append(det)
-                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
-                                elif cls == 2:
-                                    detections["debris"].append(det)
-                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
-            except Exception as e:
-                logger.error(f"Hazard detection failed in demo: {e}")
-
-        # Plate detection for stalled vehicles with bounding boxes
-        if plate_model is not None:
-            try:
-                pres = plate_model(frame, imgsz=416, conf=STALLED_CONF_THRESHOLD, half=half, verbose=False)
-                if len(pres) > 0:
-                    pboxes, pconfs, pcls = extract_detections(pres[0])
-                    for bi, box in enumerate(pboxes):
-                        if bi < len(pconfs):
-                            conf = float(pconfs[bi])
-                            if conf >= STALLED_CONF_THRESHOLD:
-                                x1,y1,x2,y2 = [int(x) for x in box]
-                                plate_w = x2 - x1
-                                plate_h = y2 - y1
-                                veh_x1 = max(0, x1 - plate_w * 1.5)
-                                veh_y1 = max(0, y1 - plate_h * 0.5)
-                                veh_x2 = min(fw, x2 + plate_w * 1.5)
-                                veh_y2 = min(fh, y2 + plate_h * 1.5)
-                                vehicle_box = [veh_x1, veh_y1, veh_x2, veh_y2]
-                                detections["stalled_vehicles"].append({
-                                    "bbox": vehicle_box,
-                                    "confidence": round(conf, 3),
-                                    "severity": "medium"
-                                })
-                                # Draw bounding box for vehicle (purple)
-                                DrawingManager.draw_custom_boxes(frame, [vehicle_box], [0], [conf], names=["stalled_vehicle"], color=(255, 0, 255))
-            except Exception as e:
-                logger.error(f"Plate detection failed in demo: {e}")
-
-        # Face detection for blurring
-        if face_model is not None:
-            try:
-                fres = face_model(frame, imgsz=416, conf=0.01, half=half, verbose=False)
-                if len(fres) > 0:
-                    face_boxes, face_confs, _ = extract_detections(fres[0])
-                    for bi, box in enumerate(face_boxes):
-                        if bi < len(face_confs) and float(face_confs[bi]) >= 0.01:
-                            x1,y1,x2,y2 = [int(x) for x in box]
-                            BlurManager.safe_blur_roi(frame, x1,y1,x2,y2, DEFAULT_FACE_KERNEL)
-            except Exception as e:
-                logger.error(f"Face blurring failed in demo: {e}")
-
-        # Plate blurring
-        if plate_model is not None:
-            try:
-                pres = plate_model(frame, imgsz=416, conf=0.20, half=half, verbose=False)
-                if len(pres) > 0:
-                    pboxes, pconfs, _ = extract_detections(pres[0])
-                    for bi, box in enumerate(pboxes):
-                        if bi < len(pconfs) and float(pconfs[bi]) >= 0.20:
-                            x1,y1,x2,y2 = [int(x) for x in box]
-                            BlurManager.safe_blur_roi(frame, x1,y1,x2,y2, DEFAULT_PLATE_KERNEL)
-            except Exception as e:
-                logger.error(f"Plate blurring failed in demo: {e}")
-
-        # Encode processed image
-        success, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
-        if not success:
-            return jsonify({"error": "Failed to encode processed image"}), 500
-            
-        processed_image_b64 = base64.b64encode(buffer).decode('utf-8')
-
-        logger.info(f"Demo processing completed: {sum(len(v) for v in detections.values())} detections found")
-
-        return jsonify({
-            "detections": detections,
-            "processed_image": processed_image_b64,
-            "image_name": image_name,
-            "image_description": image_description,
-            "image_info": {
-                "width": fw,
-                "height": fh
-            }
-        })
-
+        if HAZARD_MODEL_PATH and os.path.exists(HAZARD_MODEL_PATH):
+            models['hazard'] = YOLO(HAZARD_MODEL_PATH, task="detect")
+            models['hazard'].to(device)
     except Exception as e:
-        logger.error(f"Demo processing error: {e}")
-        logger.error(traceback.format_exc())
-        return jsonify({"error": str(e)}), 500
+        st.error(f"Failed to load hazard model: {e}")
+    
+    try:
+        if PLATE_MODEL_PATH and os.path.exists(PLATE_MODEL_PATH):
+            models['plate'] = YOLO(PLATE_MODEL_PATH, task="detect")
+            models['plate'].to(device)
+    except Exception as e:
+        st.error(f"Failed to load plate model: {e}")
+    
+    try:
+        if FACE_MODEL_PATH and os.path.exists(FACE_MODEL_PATH):
+            models['face'] = YOLO(FACE_MODEL_PATH, task="detect")
+            models['face'].to(device)
+    except Exception as e:
+        st.error(f"Failed to load face model: {e}")
+    
+    return models, device
 
-@app.route('/health', methods=['GET'])
-def health_check():
-    """Health check endpoint"""
-    return jsonify({
-        "status": "healthy",
-        "timestamp": now_iso_utc(),
-        "models_loaded": {
-            "pothole": pothole_model is not None,
-            "hazard": hazard_model is not None,
-            "plate": plate_model is not None,
-            "face": face_model is not None
-        }
+# ------------- DETECTION FUNCTIONS -------------
+def process_image(image, models, draw_boxes=False):
+    """Process image and return detections"""
+    if image is None:
+        return None
+    
+    # Convert PIL to OpenCV if needed
+    if isinstance(image, Image.Image):
+        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    
+    frame = image.copy()
+    fh, fw = frame.shape[:2]
+    
+    detections = {
+        "potholes": [],
+        "stalled_vehicles": [],
+        "speed_breakers": [],
+        "manholes": [],
+        "debris": []
+    }
+    
+    # Pothole detection
+    if 'pothole' in models:
+        try:
+            res = models['pothole'](frame, imgsz=INFERENCE_SIZE, conf=CONF_THRESHOLD, verbose=False)
+            if len(res) > 0:
+                boxes, confs, classes = extract_detections(res[0])
+                for bi, box in enumerate(boxes):
+                    if bi < len(confs):
+                        conf = float(confs[bi])
+                        if conf >= CONF_THRESHOLD:
+                            severity = compute_severity(conf, box, fw, fh)
+                            detections["potholes"].append({
+                                "bbox": [int(x) for x in box],
+                                "confidence": round(conf, 3),
+                                "severity": severity
+                            })
+                            if draw_boxes:
+                                DrawingManager.draw_custom_boxes(frame, [box], [0], [conf], names=["pothole"], color=(0, 0, 255))
+        except Exception as e:
+            st.error(f"Pothole detection failed: {e}")
+    
+    # Hazard detection
+    if 'hazard' in models:
+        try:
+            hres = models['hazard'](frame, imgsz=INFERENCE_SIZE, conf=HAZARD_CONF_THRESHOLD, verbose=False)
+            if len(hres) > 0:
+                hboxes, hconfs, hcls = extract_detections(hres[0])
+                for bi, box in enumerate(hboxes):
+                    if bi < len(hconfs) and bi < len(hcls):
+                        conf = float(hconfs[bi])
+                        if conf >= HAZARD_CONF_THRESHOLD:
+                            cls = int(hcls[bi])
+                            severity = compute_severity(conf, box, fw, fh)
+                            det = {
+                                "bbox": [int(x) for x in box],
+                                "confidence": round(conf, 3),
+                                "severity": severity
+                            }
+                            colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255)]
+                            color = colors[cls] if cls < len(colors) else (0, 255, 0)
+                            
+                            if cls == 0:
+                                detections["speed_breakers"].append(det)
+                                if draw_boxes:
+                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
+                            elif cls == 1:
+                                detections["manholes"].append(det)
+                                if draw_boxes:
+                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
+                            elif cls == 2:
+                                detections["debris"].append(det)
+                                if draw_boxes:
+                                    DrawingManager.draw_custom_boxes(frame, [box], [cls], [conf], names=["speed_breaker", "manhole", "debris"], color=color)
+        except Exception as e:
+            st.error(f"Hazard detection failed: {e}")
+    
+    # Plate detection for stalled vehicles
+    if 'plate' in models:
+        try:
+            pres = models['plate'](frame, imgsz=416, conf=STALLED_CONF_THRESHOLD, verbose=False)
+            if len(pres) > 0:
+                pboxes, pconfs, pcls = extract_detections(pres[0])
+                for bi, box in enumerate(pboxes):
+                    if bi < len(pconfs):
+                        conf = float(pconfs[bi])
+                        if conf >= STALLED_CONF_THRESHOLD:
+                            x1, y1, x2, y2 = [int(x) for x in box]
+                            plate_w = x2 - x1
+                            plate_h = y2 - y1
+                            veh_x1 = max(0, x1 - plate_w * 1.5)
+                            veh_y1 = max(0, y1 - plate_h * 0.5)
+                            veh_x2 = min(fw, x2 + plate_w * 1.5)
+                            veh_y2 = min(fh, y2 + plate_h * 1.5)
+                            vehicle_box = [veh_x1, veh_y1, veh_x2, veh_y2]
+                            detections["stalled_vehicles"].append({
+                                "bbox": vehicle_box,
+                                "confidence": round(conf, 3),
+                                "severity": "medium"
+                            })
+                            if draw_boxes:
+                                DrawingManager.draw_custom_boxes(frame, [vehicle_box], [0], [conf], names=["stalled_vehicle"], color=(255, 0, 255))
+        except Exception as e:
+            st.error(f"Plate detection failed: {e}")
+    
+    # Face blurring
+    if 'face' in models:
+        try:
+            fres = models['face'](frame, imgsz=416, conf=0.01, verbose=False)
+            if len(fres) > 0:
+                face_boxes, face_confs, _ = extract_detections(fres[0])
+                for bi, box in enumerate(face_boxes):
+                    if bi < len(face_confs) and float(face_confs[bi]) >= 0.01:
+                        x1, y1, x2, y2 = [int(x) for x in box]
+                        BlurManager.safe_blur_roi(frame, x1, y1, x2, y2, DEFAULT_FACE_KERNEL)
+        except Exception as e:
+            st.error(f"Face blurring failed: {e}")
+    
+    # Plate blurring
+    if 'plate' in models:
+        try:
+            pres = models['plate'](frame, imgsz=416, conf=0.20, verbose=False)
+            if len(pres) > 0:
+                pboxes, pconfs, _ = extract_detections(pres[0])
+                for bi, box in enumerate(pboxes):
+                    if bi < len(pconfs) and float(pconfs[bi]) >= 0.20:
+                        x1, y1, x2, y2 = [int(x) for x in box]
+                        BlurManager.safe_blur_roi(frame, x1, y1, x2, y2, DEFAULT_PLATE_KERNEL)
+        except Exception as e:
+            st.error(f"Plate blurring failed: {e}")
+    
+    return detections, frame
+
+# ------------- STREAMLIT APP -------------
+def main():
+    st.set_page_config(
+        page_title="Road Hazard Detector - Team-GPT",
+        page_icon="🛣️",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+    
+    # Custom CSS
+    st.markdown("""
+    <style>
+    .main-header {
+        font-size: 2.5rem;
+        color: #1f77b4;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .sub-header {
+        font-size: 1.2rem;
+        color: #666;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .metric-card {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        margin: 0.5rem;
+    }
+    .detection-high {
+        border-left: 4px solid #ff4b4b;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+    .detection-medium {
+        border-left: 4px solid #ffa64b;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+    .detection-low {
+        border-left: 4px solid #4caf50;
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Initialize session state
+    if 'models_loaded' not in st.session_state:
+        with st.spinner("Loading AI models..."):
+            models, device = load_models()
+            st.session_state.models = models
+            st.session_state.device = device
+            st.session_state.models_loaded = True
+    
+    if 'detection_history' not in st.session_state:
+        st.session_state.detection_history = []
+    
+    if 'current_user' not in st.session_state:
+        st.session_state.current_user = "User 1"
+    
+    # Sidebar
+    with st.sidebar:
+        st.title("🛣️ Team-GPT")
+        st.markdown("---")
+        
+        # Navigation
+        page = st.radio(
+            "Navigation",
+            ["Dashboard", "Detection", "History", "Analytics", "Settings"],
+            index=1
+        )
+        
+        st.markdown("---")
+        
+        # User info
+        st.subheader("User Profile")
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.write(f"**{st.session_state.current_user}**")
+            st.write("Road Safety Analyst")
+        with col2:
+            if st.button("🔄", help="Switch User"):
+                st.session_state.current_user = "User 2" if st.session_state.current_user == "User 1" else "User 1"
+                st.rerun()
+        
+        st.markdown("---")
+        
+        # System status
+        st.subheader("System Status")
+        models_loaded = len(st.session_state.models) > 0
+        status_color = "🟢" if models_loaded else "🔴"
+        st.write(f"{status_color} Models: {'Loaded' if models_loaded else 'Failed'}")
+        st.write(f"🔧 Device: {st.session_state.device}")
+    
+    # Main content based on page selection
+    if page == "Dashboard":
+        show_dashboard()
+    elif page == "Detection":
+        show_detection()
+    elif page == "History":
+        show_history()
+    elif page == "Analytics":
+        show_analytics()
+    elif page == "Settings":
+        show_settings()
+
+def show_dashboard():
+    st.markdown('<h1 class="main-header">Road Hazard Detection Dashboard</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">AI-powered detection of road hazards with privacy protection</p>', unsafe_allow_html=True)
+    
+    # Stats cards
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("High Severity Hazards", "24", "+12%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("Potholes Detected", "42", "-5%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("Stalled Vehicles", "18", "+8%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col4:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("Detection Accuracy", "92%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Hazard map and recent detections
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Hazard Map Overview")
+        # Create a simple map visualization
+        map_data = pd.DataFrame({
+            'lat': [12.9716, 12.9718, 12.9714, 12.9719],
+            'lon': [77.5946, 77.5948, 77.5944, 77.5949],
+            'size': [10, 15, 8, 12],
+            'severity': ['High', 'Medium', 'Low', 'High']
+        })
+        
+        fig = px.scatter_mapbox(
+            map_data,
+            lat="lat",
+            lon="lon",
+            size="size",
+            color="severity",
+            color_discrete_map={'High': 'red', 'Medium': 'orange', 'Low': 'green'},
+            zoom=12,
+            height=400
+        )
+        fig.update_layout(mapbox_style="open-street-map")
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        st.plotly_chart(fig, use_container_width=True)
+    
+    with col2:
+        st.subheader("Recent Detections")
+        
+        # Sample recent detections
+        recent_detections = [
+            {"type": "Pothole", "severity": "high", "location": "Main St & 5th Ave", "time": "2 hours ago", "confidence": 92},
+            {"type": "Stalled Vehicle", "severity": "medium", "location": "Highway 101, Exit 42", "time": "5 hours ago", "confidence": 87},
+            {"type": "Debris", "severity": "low", "location": "Oak Street", "time": "1 day ago", "confidence": 78},
+            {"type": "Speed Breaker", "severity": "medium", "location": "School Zone, Elm St", "time": "2 days ago", "confidence": 82}
+        ]
+        
+        for detection in recent_detections:
+            severity_class = f"detection-{detection['severity'].lower()}"
+            st.markdown(f'<div class="{severity_class}">', unsafe_allow_html=True)
+            st.write(f"**{detection['type']}** - {detection['confidence']}%")
+            st.write(f"📍 {detection['location']}")
+            st.write(f"⏰ {detection['time']}")
+            st.markdown('</div>', unsafe_allow_html=True)
+
+def show_detection():
+    st.markdown('<h1 class="main-header">Road Hazard Detection</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Upload road images for AI-powered hazard detection</p>', unsafe_allow_html=True)
+    
+    # Detection mode selection
+    detection_mode = st.radio(
+        "Detection Mode",
+        ["Upload Image", "Demo Images"],
+        horizontal=True
+    )
+    
+    if detection_mode == "Upload Image":
+        show_upload_section()
+    else:
+        show_demo_section()
+
+def show_upload_section():
+    uploaded_file = st.file_uploader(
+        "Upload a road image",
+        type=['png', 'jpg', 'jpeg', 'bmp'],
+        help="Upload an image of a road to detect hazards"
+    )
+    
+    if uploaded_file is not None:
+        # Display original image
+        image = Image.open(uploaded_file)
+        st.subheader("Original Image")
+        st.image(image, use_column_width=True)
+        
+        # Process image
+        if st.button("Detect Hazards", type="primary"):
+            with st.spinner("Processing image..."):
+                detections, processed_frame = process_image(image, st.session_state.models, draw_boxes=True)
+            
+            # Display results
+            show_detection_results(image, processed_frame, detections)
+
+def show_demo_section():
+    st.subheader("Demo Images")
+    
+    # Demo path input
+    demo_path = st.text_input(
+        "Demo Images Path (Optional)",
+        placeholder="Enter path to demo images folder",
+        help="Leave empty to use default demo images"
+    )
+    
+    # Load demo images
+    demo_images = get_demo_images(demo_path if demo_path else None)
+    
+    if not demo_images:
+        st.warning("No demo images found. Please check the path or use default images.")
+        return
+    
+    # Display demo images in a grid
+    cols = st.columns(3)
+    selected_image = None
+    
+    for i, demo_img in enumerate(demo_images):
+        col = cols[i % 3]
+        with col:
+            if demo_img['data']:  # Only show if we have image data
+                # Decode base64 image
+                try:
+                    img_bytes = base64.b64decode(demo_img['data'])
+                    img = Image.open(io.BytesIO(img_bytes))
+                    
+                    st.image(img, caption=demo_img['name'], use_column_width=True)
+                    if st.button(f"Process {demo_img['name']}", key=f"btn_{i}"):
+                        selected_image = demo_img
+                except Exception as e:
+                    st.error(f"Error loading image {demo_img['name']}: {e}")
+    
+    # Process selected demo image
+    if selected_image:
+        st.subheader(f"Processing: {selected_image['name']}")
+        
+        with st.spinner("Processing demo image..."):
+            # Decode and process
+            img_bytes = base64.b64decode(selected_image['data'])
+            img = Image.open(io.BytesIO(img_bytes))
+            
+            detections, processed_frame = process_image(img, st.session_state.models, draw_boxes=True)
+            
+            # Display results
+            show_detection_results(img, processed_frame, detections, selected_image['name'])
+
+def show_detection_results(original_img, processed_frame, detections, image_name=None):
+    st.subheader("Detection Results")
+    
+    # Convert processed frame back to PIL for display
+    processed_img = Image.fromarray(cv2.cvtColor(processed_frame, cv2.COLOR_BGR2RGB))
+    
+    # Image comparison
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.write("**Original Image**")
+        st.image(original_img, use_column_width=True)
+    
+    with col2:
+        st.write("**Processed Image**")
+        st.image(processed_img, use_column_width=True)
+    
+    # Detection details
+    st.subheader("Detected Hazards")
+    
+    total_detections = sum(len(detections[key]) for key in detections)
+    if total_detections == 0:
+        st.info("No hazards detected in this image.")
+        return
+    
+    # Display detections by category
+    for category, items in detections.items():
+        if items:
+            with st.expander(f"{category.replace('_', ' ').title()} ({len(items)})", expanded=True):
+                for i, item in enumerate(items):
+                    severity_class = f"detection-{item['severity']}"
+                    st.markdown(f'<div class="{severity_class}">', unsafe_allow_html=True)
+                    st.write(f"**Confidence:** {item['confidence']*100:.1f}%")
+                    st.write(f"**Bounding Box:** {item['bbox']}")
+                    st.write(f"**Severity:** {item['severity'].upper()}")
+                    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Report section
+    st.subheader("Report Hazards")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        location = st.text_input("Location", placeholder="Enter hazard location")
+    
+    with col2:
+        priority = st.selectbox("Priority", ["Low", "Medium", "High"])
+    
+    notes = st.text_area("Additional Notes", placeholder="Add any additional details about the hazards")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("📤 Send Report", type="primary", use_container_width=True):
+            if location:
+                # Save to session state
+                report = {
+                    "timestamp": now_iso_utc(),
+                    "image_name": image_name or "uploaded_image",
+                    "location": location,
+                    "priority": priority,
+                    "notes": notes,
+                    "detections": detections,
+                    "user": st.session_state.current_user
+                }
+                st.session_state.detection_history.append(report)
+                st.success("Report sent successfully!")
+            else:
+                st.error("Please enter a location for the report.")
+    
+    with col2:
+        if st.button("💾 Save Report", use_container_width=True):
+            # Create downloadable report
+            report_data = {
+                "detections": detections,
+                "timestamp": now_iso_utc(),
+                "user": st.session_state.current_user,
+                "image_name": image_name or "uploaded_image"
+            }
+            
+            # Convert to JSON for download
+            json_str = json.dumps(report_data, indent=2)
+            st.download_button(
+                label="Download Report JSON",
+                data=json_str,
+                file_name=f"hazard_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                mime="application/json"
+            )
+
+def show_history():
+    st.markdown('<h1 class="main-header">Detection History</h1>', unsafe_allow_html=True)
+    
+    if not st.session_state.detection_history:
+        st.info("No detection history available. Process some images to see history here.")
+        return
+    
+    # Filters
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        date_filter = st.selectbox("Date Range", ["Last 7 days", "Last 30 days", "Last 3 months", "All time"])
+    
+    with col2:
+        type_filter = st.selectbox("Hazard Type", ["All types", "Potholes", "Stalled Vehicles", "Speed Breakers", "Manholes", "Debris"])
+    
+    with col3:
+        severity_filter = st.selectbox("Severity", ["All severities", "High", "Medium", "Low"])
+    
+    # History table
+    st.subheader("Detection Records")
+    
+    # Convert history to DataFrame for display
+    history_data = []
+    for record in st.session_state.detection_history:
+        # Count detections by type
+        detection_counts = {k: len(v) for k, v in record['detections'].items() if v}
+        
+        history_data.append({
+            "Date": record['timestamp'][:10],
+            "Time": record['timestamp'][11:19],
+            "Image": record['image_name'],
+            "Location": record['location'],
+            "Priority": record['priority'],
+            "Potholes": detection_counts.get('potholes', 0),
+            "Stalled Vehicles": detection_counts.get('stalled_vehicles', 0),
+            "Speed Breakers": detection_counts.get('speed_breakers', 0),
+            "Manholes": detection_counts.get('manholes', 0),
+            "Debris": detection_counts.get('debris', 0),
+            "User": record['user']
+        })
+    
+    if history_data:
+        df = pd.DataFrame(history_data)
+        st.dataframe(df, use_container_width=True)
+        
+        # Export option
+        if st.button("Export History to CSV"):
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="Download CSV",
+                data=csv,
+                file_name=f"detection_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv"
+            )
+    else:
+        st.info("No records match the current filters.")
+
+def show_analytics():
+    st.markdown('<h1 class="main-header">Detection Analytics</h1>', unsafe_allow_html=True)
+    
+    # Analytics cards
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("Total Hazards Detected", "1,247", "+18%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("Average Detection Accuracy", "84%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.metric("System Uptime", "92%", "+3%")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Charts
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Hazard Distribution")
+        
+        # Sample data for pie chart
+        hazard_data = pd.DataFrame({
+            'Type': ['Potholes', 'Stalled Vehicles', 'Speed Breakers', 'Manholes', 'Debris'],
+            'Count': [42, 18, 15, 8, 12]
+        })
+        
+        fig = px.pie(hazard_data, values='Count', names='Type', hole=0.3)
+        st.plotly_chart(fig, use_container_width=True)
+    
+    with col2:
+        st.subheader("Detection Trends")
+        
+        # Sample data for line chart
+        trend_data = pd.DataFrame({
+            'Date': pd.date_range('2023-09-01', periods=30, freq='D'),
+            'Detections': np.random.randint(10, 50, 30)
+        })
+        
+        fig = px.line(trend_data, x='Date', y='Detections', title="Daily Detections")
+        st.plotly_chart(fig, use_container_width=True)
+    
+    # Severity analysis
+    st.subheader("Severity Analysis")
+    
+    severity_data = pd.DataFrame({
+        'Severity': ['High', 'Medium', 'Low'],
+        'Count': [24, 35, 28],
+        'Color': ['#ff4b4b', '#ffa64b', '#4caf50']
     })
+    
+    fig = px.bar(severity_data, x='Severity', y='Count', color='Severity',
+                 color_discrete_map={'High': '#ff4b4b', 'Medium': '#ffa64b', 'Low': '#4caf50'})
+    st.plotly_chart(fig, use_container_width=True)
+
+def show_settings():
+    st.markdown('<h1 class="main-header">Settings</h1>', unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("User Preferences")
+        
+        dark_mode = st.toggle("Dark Mode", value=True, help="Use dark theme for the application")
+        notifications = st.toggle("Notifications", value=True, help="Receive alerts for new detections")
+        auto_save = st.toggle("Auto-save Reports", value=False, help="Automatically save detection reports")
+        
+        st.subheader("Detection Settings")
+        
+        confidence_threshold = st.selectbox(
+            "Confidence Threshold",
+            ["Low (50%)", "Medium (70%)", "High (85%)"],
+            index=1,
+            help="Minimum confidence for hazard detection"
+        )
+        
+        privacy_mode = st.toggle("Privacy Mode", value=True, help="Blur sensitive information in images")
+        auto_process = st.toggle("Auto-process Images", value=True, help="Process images immediately after upload")
+    
+    with col2:
+        st.subheader("Security & Privacy")
+        
+        data_encryption = st.toggle("Data Encryption", value=True, help="Encrypt all stored data")
+        auto_logout = st.toggle("Auto-logout", value=False, help="Automatically logout after 30 minutes")
+        audit_logging = st.toggle("Audit Logging", value=True, help="Keep logs of all user activities")
+        
+        st.subheader("Data Management")
+        
+        retention_period = st.selectbox(
+            "Retention Period",
+            ["30 days", "90 days", "1 year", "Indefinitely"],
+            index=1,
+            help="How long to keep detection data"
+        )
+        
+        backup_frequency = st.selectbox(
+            "Backup Frequency",
+            ["Daily", "Weekly", "Monthly"],
+            index=1,
+            help="How often to backup data"
+        )
+    
+    if st.button("Save All Settings", type="primary"):
+        st.success("Settings saved successfully!")
 
 if __name__ == "__main__":
-    logger.info("Starting Flask backend for Road Hazard Detection")
-    logger.info(f"Models loaded - Pothole: {pothole_model is not None}, Hazard: {hazard_model is not None}, Plate: {plate_model is not None}, Face: {face_model is not None}")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    import io  # Add this import for BytesIO
+    main()

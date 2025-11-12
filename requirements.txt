@@ -21,3 +21,10 @@ paho-mqtt==2.1.0
 tqdm==4.66.5
 psutil==6.0.0
 Werkzeug==3.0.4
+streamlit 
+ultralytics 
+opencv-python 
+pillow 
+plotly 
+pandas
+ torch
