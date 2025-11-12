@@ -27,4 +27,4 @@ opencv-python
 pillow 
 plotly 
 pandas
- torch
+torch==2.5.0
