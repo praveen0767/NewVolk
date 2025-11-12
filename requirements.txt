@@ -27,4 +27,4 @@ opencv-python
 pillow 
 plotly 
 pandas
-
+Flask==3.0.3
