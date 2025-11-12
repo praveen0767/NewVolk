@@ -28,3 +28,4 @@ pillow
 plotly 
 pandas
 Flask==3.0.3
+pipdeptree
