@@ -1,0 +1,1188 @@
+2025-11-12 18:38:08,481 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:38:08,481 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:38:08,792 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:38:08,887 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:38:09,029 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:38:09,154 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:38:09,162 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:38:09,162 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:38:09,221 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 18:38:09,222 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 18:38:09,246 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 18:38:13,064 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:38:13,065 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:38:13,275 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:38:13,340 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:38:13,443 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:38:13,535 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:38:13,541 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:38:13,541 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:38:13,559 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 18:38:13,574 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 18:38:13,678 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:13,680 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:13,681 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:13,879 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:13,879 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:13,887 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:13] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:13,894 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:13] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:13,897 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:13,907 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:13] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:19,208 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:19,276 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:19,282 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:19] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:37,699 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:37,758 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:37,763 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:37] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:38,869 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:38,932 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:38,937 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:38] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:39,000 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:39,060 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:39,066 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:39] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:45,135 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:45,195 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:45,199 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:45] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:45,778 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:45,828 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:45,832 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:45] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:46,749 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:46,811 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:46,815 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:46] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:47,393 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:47,445 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:47,449 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:47] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:48,348 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:48,408 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:48,412 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:48] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:48,988 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:49,045 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:49,049 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:49] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:49,958 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:50,012 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:50,016 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:50] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:50,651 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:50,704 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:50,707 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:50] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:52,577 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:52,641 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:52,647 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:53,198 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:53,260 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:53,265 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:53] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:54,309 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:54,373 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:54,377 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:54] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:54,810 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:54,872 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:54,878 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:54] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:55,073 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:55,134 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:55,140 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:55,274 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:55,336 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:55,340 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:55,986 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:56,047 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:56,053 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:56] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:57,053 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:57,116 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:57,121 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:57,616 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:57,676 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:57,681 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:58,738 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:58,801 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:58,806 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:58] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:59,230 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:59,290 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:59,296 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:59] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:59,494 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:59,553 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:59,558 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:59] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:38:59,692 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:38:59,753 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:38:59,758 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:38:59] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:00,408 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:00,477 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:00,482 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:01,527 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:01,610 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:01,616 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:02,100 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:02,161 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:02,167 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:02,367 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:02,429 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:02,435 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:02,595 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:02,655 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:02,661 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:03,285 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:03,341 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:03,347 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:03] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:04,258 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:04,320 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:04,326 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:04] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:04,922 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:04,977 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:04,983 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:04] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:05,883 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:05,944 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:05,950 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:05] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:06,499 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:06,563 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:06,568 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:06] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:07,499 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:07,560 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:07,567 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:07] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:08,142 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:08,200 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:08,205 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:08] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:09,151 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:09,214 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:09,219 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:09] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:09,766 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:09,832 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:09,837 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:09] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:10,026 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:10,084 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:10,089 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:10] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:10,232 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:10,293 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:10,299 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:10] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:10,935 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:10,996 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:11,003 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:11] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:11,908 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:11,970 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:11,974 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:11] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:27,194 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:27,255 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:27,259 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:39:30,809 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:39:30,872 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:39:30,879 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:39:30] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:25,106 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:41:25,107 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:41:25,391 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:41:25,458 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:41:25,563 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:41:25,673 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:41:25,680 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:41:25,681 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:41:25,713 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 18:41:25,714 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 18:41:25,736 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 18:41:29,970 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:41:29,971 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:41:30,177 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:41:30,245 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:41:30,322 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:41:30,386 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:41:30,391 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:41:30,392 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:41:30,406 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 18:41:30,420 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 18:41:30,509 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:30,511 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:30,584 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:30,590 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:30] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:30,590 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:30,596 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:30] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:56,487 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:56,548 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:56,552 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:56] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:57,153 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:57,231 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:57,236 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:58,179 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:58,241 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:58,245 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:58] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:58,748 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:58,804 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:58,809 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:58] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:41:59,738 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:41:59,790 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:41:59,796 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:41:59] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:00,377 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:00,427 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:00,431 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:01,323 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:01,379 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:01,385 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:01,975 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:02,027 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:02,030 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:03,006 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:03,073 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:03,079 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:03] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:03,597 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:03,659 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:03,664 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:03] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:04,640 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:04,700 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:04,706 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:04] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:05,239 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:05,300 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:05,305 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:05] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:06,247 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:06,312 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:06,317 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:06] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:06,807 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:06,866 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:06,870 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:06] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:07,814 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:07,879 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:07,885 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:07] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:08,414 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:08,474 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:08,480 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:08] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:09,430 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:09,494 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:09,499 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:09] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:20,132 - werkzeug - INFO -  * Detected change in 'D:\\Volks\\Hazard_detection\\demo_images.py', reloading
+2025-11-12 18:42:20,133 - werkzeug - INFO -  * Detected change in 'D:\\Volks\\Hazard_detection\\demo_images.py', reloading
+2025-11-12 18:42:21,298 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 18:42:24,737 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:42:24,738 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:42:24,878 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:42:24,930 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:42:25,002 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:42:25,064 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:42:25,070 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:42:25,071 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:42:25,086 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 18:42:25,099 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 18:42:47,208 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:47,272 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:47,278 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:47] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:48,443 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:48,509 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:48,515 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:48] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:48,942 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:49,002 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:49,008 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:49] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:49,204 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:49,265 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:49,269 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:49] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:49,407 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:49,469 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:49,474 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:49] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:50,131 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:50,193 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:50,198 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:50] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:51,263 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:51,328 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:51,333 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:51] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:51,781 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:51,842 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:51,846 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:51] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:52,797 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:52,859 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:52,865 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:53,428 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:53,488 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:53,494 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:53] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:54,543 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:54,611 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:54,616 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:54] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:55,054 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:55,117 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:55,123 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:55,316 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:55,382 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:55,388 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:55,537 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:55,598 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:55,603 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:56,214 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:56,275 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:56,279 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:56] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:57,333 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:57,394 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:57,400 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:57,870 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:57,932 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:57,938 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:58,120 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:58,181 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:58,185 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:58] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:58,338 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:58,400 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:58,405 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:58] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:42:59,045 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:42:59,108 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:42:59,114 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:42:59] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:43:00,110 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:43:00,173 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:43:00,179 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:43:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:43:00,674 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:43:00,735 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:43:00,741 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:43:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:43:00,937 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:43:00,999 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:43:01,002 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:43:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:43:01,150 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:43:01,209 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:43:01,215 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:43:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:43:01,867 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:43:01,931 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 18:43:01,937 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:43:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:46:06,938 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:46:06,939 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:46:07,162 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:46:07,235 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:46:07,310 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:46:07,385 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:46:07,390 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:46:07,391 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:46:07,425 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 18:46:07,426 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 18:46:07,445 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 18:46:11,484 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 18:46:11,484 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 18:46:11,671 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 18:46:11,729 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 18:46:11,803 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 18:46:11,875 - __main__ - INFO - Face model loaded successfully
+2025-11-12 18:46:11,881 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 18:46:11,881 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 18:46:11,897 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 18:46:11,913 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 18:47:21,508 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:21,566 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:21,574 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:21] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:22,711 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:22,773 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:22,779 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:22] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:23,288 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:23,343 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:23,347 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:23] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:24,714 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:24,769 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:24,775 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:25,494 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:25,551 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:25,555 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:25] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:26,127 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:26,178 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:26,182 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:26] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:27,169 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:27,230 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:27,233 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:27,743 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:27,799 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:27,802 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:28,822 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:28,878 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:28,883 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:28] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:29,351 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:29,406 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:29,411 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:29] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:30,422 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:30,477 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:30,482 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:30] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:30,968 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:31,022 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:31,027 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:31] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:32,133 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:32,191 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:32,195 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:32] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:32,676 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:32,735 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:32,741 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:32] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:32,922 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:32,979 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:32,983 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:32] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:33,147 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:33,205 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:33,209 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:33] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:33,834 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:33,889 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:33,895 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:33] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:35,138 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:35,195 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:35,200 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:35] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:35,961 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:36,018 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:36,023 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:36] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:36,598 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:36,650 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:36,655 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:36] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:47:37,702 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:47:37,762 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:47:37,767 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:47:37] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:16,666 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:16,721 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:16,724 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:16] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:17,894 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:17,952 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:17,960 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:17] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:18,435 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:18,488 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:18,493 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:18] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:19,521 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:19,580 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:19,585 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:19] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:20,053 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:20,110 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:20,115 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:20] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:21,164 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:21,219 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:21,224 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:21] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:21,677 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:21,729 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:21,733 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:21] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:22,775 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:22,832 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:22,837 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:22] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:23,316 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:23,372 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:23,376 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:23] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:24,397 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:24,454 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:24,457 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:24,931 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:24,988 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:24,993 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:26,037 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:26,095 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:26,100 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:26] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:26,532 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:26,587 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:26,592 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:26] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:26,796 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:26,853 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:26,858 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:26] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:27,120 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:27,183 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:27,194 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:27,772 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:27,822 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:27,826 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:28,801 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:28,858 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:28,863 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:28] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 18:49:29,388 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 18:49:29,441 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 18:49:29,445 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 18:49:29] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:23:34,257 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:23:34,258 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:23:34,862 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:23:34,945 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:23:35,039 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:23:35,137 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:23:35,143 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:23:35,144 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:23:35,198 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 20:23:35,198 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 20:23:35,219 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 20:23:38,384 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:23:38,384 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:23:38,545 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:23:38,593 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:23:38,649 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:23:38,712 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:23:38,719 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:23:38,720 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:23:38,733 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 20:23:38,744 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 20:24:05,644 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:24:05,762 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:24:05,768 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:24:05] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:25:19,388 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:25:19,440 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:25:19,444 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:25:19] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:26:07,947 - werkzeug - INFO -  * Detected change in 'C:\\Users\\prave\\anaconda3\\Lib\\json\\__init__.py', reloading
+2025-11-12 20:26:09,350 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 20:26:13,609 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:26:13,609 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:26:13,844 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:26:13,909 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:26:14,018 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:26:14,128 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:26:14,134 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:26:14,135 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:26:14,150 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 20:26:14,163 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 20:26:14,211 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:26:14,281 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:26:14,286 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:26:14] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:50:31,881 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:50:31,883 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:50:32,369 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:50:32,433 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:50:32,535 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:50:32,622 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:50:32,635 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:50:32,635 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:50:32,662 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 20:50:32,662 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 20:50:32,686 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 20:50:36,041 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:50:36,042 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:50:36,214 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:50:36,272 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:50:36,346 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:50:36,398 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:50:36,403 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:50:36,404 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:50:36,416 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 20:50:36,426 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 20:50:52,042 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:50:52,125 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:50:52,130 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:50:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:50:54,294 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:50:54,354 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:50:54,367 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:50:54] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:50:57,303 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:50:57] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 20:50:57,566 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 20:50:57,626 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 20:50:59,067 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 20:50:59,069 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:50:59] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:50:59,074 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 20:50:59,132 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 20:50:59,926 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 20:50:59,928 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:50:59] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:51:00,234 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 20:51:00,290 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 20:51:01,021 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:51:01,023 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:51:01] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:51:01,026 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 20:51:01,082 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (614x403)
+2025-11-12 20:51:01,885 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 20:51:01,886 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:51:01] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:51:02,207 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 20:51:02,259 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 20:51:03,009 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:51:03,010 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:51:03] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:51:03,015 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:51:03] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 20:51:03,343 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 20:51:03,403 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 20:51:04,097 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:51:04,098 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:51:04] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:52:54,356 - werkzeug - INFO -  * Detected change in 'D:\\Volks\\venv\\Lib\\site-packages\\cv2\\__init__.py', reloading
+2025-11-12 20:52:55,813 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 20:52:59,556 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 20:52:59,557 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 20:52:59,760 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 20:52:59,816 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 20:52:59,933 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 20:53:00,025 - __main__ - INFO - Face model loaded successfully
+2025-11-12 20:53:00,029 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 20:53:00,029 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 20:53:00,044 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 20:53:00,054 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 20:53:00,093 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:00,094 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:00,150 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:00,154 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:00,154 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:00,158 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:00,527 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:00,575 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:00,579 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:00,751 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:00,800 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:00,803 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:00] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:01,310 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:01,361 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:01,366 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:01,592 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:01,648 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:01,653 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:01] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:53:02,241 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:53:02,286 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:53:02,290 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:53:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:54:02,703 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:54:02,757 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:54:02,761 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:02] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:54:30,249 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:54:30,313 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:54:30,317 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:30] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:54:32,759 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:32] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:33,024 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 20:54:33,091 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 20:54:34,462 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 20:54:34,463 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:34] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:34,468 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 20:54:34,526 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 20:54:35,262 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 20:54:35,263 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:35] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:35,577 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 20:54:35,631 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 20:54:36,276 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:54:36,277 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:36] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:36,281 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 20:54:36,340 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (614x403)
+2025-11-12 20:54:37,122 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 20:54:37,125 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:37] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:37,445 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 20:54:37,504 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 20:54:38,287 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:54:38,288 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:38] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:38,294 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:38] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 20:54:38,607 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 20:54:38,660 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 20:54:39,318 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 20:54:39,319 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:54:39] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 20:55:03,130 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:03,185 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:03,190 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:03] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:23,558 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:23,605 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:23,607 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:23] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:23,821 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:23,879 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:23,885 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:23] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:24,131 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:24,187 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:24,192 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:24,769 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:24,821 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:24,825 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:26,987 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:27,042 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:27,046 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:27,589 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:27,635 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:27,638 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:27] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:34,956 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:35,012 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:35,016 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:35] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:35,739 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:35,795 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:35,801 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:35] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:36,334 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:36,381 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:36,384 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:36] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:38,874 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:38,925 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:38,928 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:38] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:39,466 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:39,515 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:39,519 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:39] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:55:39,734 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:55:39,781 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:55:39,785 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:55:39] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 20:56:36,764 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 20:56:36,812 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 20:56:36,817 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 20:56:36] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:12:37,133 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:12:37,133 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 21:12:37,353 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:12:37,416 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:12:37,536 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:12:37,632 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:12:37,638 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:12:37,638 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:12:37,668 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 21:12:37,668 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 21:12:37,695 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 21:12:40,871 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:12:40,872 - __main__ - INFO - Loading pothole model: D:\Volks\frontopp\YOLOv8_Small_RDD.pt
+2025-11-12 21:12:41,020 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:12:41,072 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:12:41,143 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:12:41,203 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:12:41,207 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:12:41,207 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:12:41,221 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:12:41,234 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 21:13:22,802 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:13:22,877 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:13:22,881 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:22] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:13:24,160 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:13:24,217 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:13:24,221 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:24] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:13:26,498 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:13:26,557 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:13:26,561 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:26] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:13:28,226 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:28] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:28,554 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 21:13:28,618 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 21:13:30,015 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:13:30,017 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:30] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:30,022 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 21:13:30,084 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 21:13:30,833 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 21:13:30,835 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:30] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:31,145 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 21:13:31,200 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 21:13:31,890 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:13:31,892 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:31] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:31,897 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 21:13:31,951 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (614x403)
+2025-11-12 21:13:32,714 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:13:32,716 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:32] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:33,033 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 21:13:33,083 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 21:13:33,825 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:13:33,826 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:33] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:13:33,833 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:13:33] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:32,371 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:27:32,372 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:27:32,580 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:27:32,641 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:27:32,711 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:27:32,780 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:27:32,786 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:27:32,787 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:27:32,817 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 21:27:32,818 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 21:27:32,837 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 21:27:36,020 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:27:36,021 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:27:36,230 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:27:36,292 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:27:36,357 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:27:36,462 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:27:36,468 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:27:36,468 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:27:36,486 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:27:36,503 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 21:27:36,784 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:27:36,872 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:27:36,877 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:36] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:27:38,192 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:27:38,250 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:27:38,255 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:38] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:27:40,621 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:40] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:40,884 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 21:27:40,950 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 21:27:42,330 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:27:42,332 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:42] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:42,336 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 21:27:42,393 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 21:27:43,175 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 21:27:43,176 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:43] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:43,482 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 21:27:43,533 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 21:27:44,207 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:27:44,208 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:44] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:44,211 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 21:27:44,281 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (614x403)
+2025-11-12 21:27:45,061 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:27:45,062 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:45] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:45,392 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 21:27:45,447 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 21:27:46,179 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:27:46,180 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:46] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:46,184 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:46] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:46,499 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 21:27:46,553 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 21:27:47,201 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:27:47,202 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:47] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:27:49,898 - werkzeug - INFO -  * Detected change in 'C:\\Users\\prave\\anaconda3\\Lib\\json\\__init__.py', reloading
+2025-11-12 21:27:51,571 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 21:27:55,017 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:27:55,017 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:27:55,195 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:27:55,260 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:27:55,318 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:27:55,372 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:27:55,376 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:27:55,377 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:27:55,387 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:27:55,399 - werkzeug - INFO -  * Debugger PIN: 122-753-415
+2025-11-12 21:27:55,436 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:27:55,488 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:27:55,492 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:27:57,581 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:27:57,638 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:27:57,643 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:57] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:27:59,763 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:27:59] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:00,026 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 21:28:00,086 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 21:28:01,252 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:28:01,253 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:01] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:01,258 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 21:28:01,315 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 21:28:02,040 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 21:28:02,042 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:02] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:02,365 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 21:28:02,421 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 21:28:03,095 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:28:03,096 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:03] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:03,100 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 21:28:03,153 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (614x403)
+2025-11-12 21:28:03,956 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:28:03,958 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:03] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:04,272 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 21:28:04,326 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 21:28:05,046 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:28:05,047 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:05] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:05,053 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:05] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:05,364 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 21:28:05,417 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 21:28:06,020 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:28:06,021 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:06] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:30,064 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:30] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:30,326 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 21:28:30,382 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 21:28:31,064 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:28:31,065 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:31] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:32,970 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 21:28:33,030 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 21:28:33,763 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 21:28:33,764 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:33] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:37,872 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:37] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:38,136 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 21:28:38,198 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 21:28:38,970 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 21:28:38,972 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:38] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:47,293 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:47] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:47,557 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 21:28:47,616 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 21:28:48,328 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 21:28:48,330 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:48] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 21:28:51,746 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:28:51,807 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:28:51,811 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:28:51] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:29:52,078 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:29:52,134 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:29:52,138 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:29:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:30:52,155 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:30:52,212 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:30:52,216 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:30:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:30:52,772 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:30:52,825 - __main__ - INFO - Loaded 6 valid demo images
+2025-11-12 21:30:52,829 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:30:52] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:31:40,541 - werkzeug - INFO -  * Detected change in 'D:\\Volks\\Hazard_detection\\demo_images.py', reloading
+2025-11-12 21:31:41,442 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-11-12 21:31:45,488 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:31:45,488 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:52:19,234 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:52:19,235 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:52:19,536 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:52:19,606 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:52:19,675 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:52:19,742 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:52:19,747 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:52:19,748 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:52:19,773 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 21:52:19,773 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 21:52:19,776 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:52:22,774 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:52:22,774 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:52:23,009 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:52:23,059 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:52:23,117 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:52:23,174 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:52:23,179 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:52:23,179 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:52:23,193 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:52:23,204 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:52:59,060 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:52:59,711 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:53:03,139 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:53:03,140 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:53:03,397 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:53:03,458 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:53:03,563 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:53:03,637 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:53:03,643 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:53:03,644 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:53:03,657 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:53:03,667 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:53:11,913 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:53:12,540 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:53:15,959 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:53:15,959 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:53:16,180 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:53:16,230 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:53:16,297 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:53:16,357 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:53:16,362 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:53:16,362 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:53:16,374 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:53:16,385 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:53:32,814 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:53:33,401 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:53:36,495 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:53:36,496 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:53:36,712 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:53:36,769 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:53:36,833 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:53:36,886 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:53:36,892 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:53:36,892 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:53:36,901 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:53:36,913 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:55:05,036 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:55:05,632 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:55:08,996 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:55:08,996 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:55:09,286 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:55:09,335 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:55:09,396 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:55:09,446 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:55:09,451 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:55:09,452 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:55:09,462 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:55:09,474 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:55:17,704 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:55:18,367 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:55:21,632 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:55:21,632 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:55:21,910 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:55:21,962 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:55:22,035 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:55:22,095 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:55:22,099 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:55:22,099 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:55:22,112 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:55:22,125 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:55:41,695 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:55:42,285 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:55:45,665 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:55:45,666 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:55:45,906 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:55:45,958 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:55:46,019 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:55:46,071 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:55:46,076 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:55:46,076 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:55:46,088 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:55:46,099 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:55:53,311 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:55:53,901 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:55:57,231 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:55:57,232 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:55:57,465 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:55:57,516 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:55:57,581 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:55:57,635 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:55:57,639 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:55:57,639 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:55:57,650 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:55:57,660 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:56:06,950 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:56:07,525 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:56:10,896 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:56:10,896 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:56:11,140 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:56:11,195 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:56:11,261 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:56:11,319 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:56:11,324 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:56:11,324 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:56:11,340 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:56:11,355 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:56:20,654 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:56:21,289 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:56:24,557 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:56:24,558 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:56:24,843 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:56:24,905 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:56:24,983 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:56:25,047 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:56:25,051 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:56:25,052 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:56:25,065 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:56:25,077 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:56:31,273 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:56:31,920 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:56:35,354 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:56:35,354 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:56:35,599 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:56:35,645 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:56:35,712 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:56:35,763 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:56:35,767 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:56:35,767 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:56:35,778 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:56:35,789 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 21:57:31,472 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 21:57:31,497 - __main__ - INFO - Loaded 1 valid demo images
+2025-11-12 21:57:31,499 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 21:57:31] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 21:57:39,417 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 21:57:40,025 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 21:57:43,068 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 21:57:43,068 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 21:57:43,283 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 21:57:43,340 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 21:57:43,409 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 21:57:43,460 - __main__ - INFO - Face model loaded successfully
+2025-11-12 21:57:43,465 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 21:57:43,465 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 21:57:43,477 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 21:57:43,490 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 22:00:18,425 - werkzeug - INFO -  * Detected change in 'D:\\volks1\\demo_images.py', reloading
+2025-11-12 22:00:18,983 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 22:00:21,909 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 22:00:21,909 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 22:00:22,140 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 22:00:22,191 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 22:00:22,251 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 22:00:22,305 - __main__ - INFO - Face model loaded successfully
+2025-11-12 22:00:22,310 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 22:00:22,310 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 22:00:22,322 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 22:00:22,335 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 22:00:42,925 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:00:42,990 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:00:42,994 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:42] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:00:45,391 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:00:45,448 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:00:45,452 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:45] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:00:48,277 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:48] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:48,542 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 22:00:48,601 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 22:00:50,102 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 22:00:50,104 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:50] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:50,109 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 22:00:50,168 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 22:00:50,985 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 22:00:50,986 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:50] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:51,297 - __main__ - INFO - Processing demo image: speed_breaker_demo.jpg from path: None
+2025-11-12 22:00:51,353 - __main__ - INFO - Processing demo image: speed_breaker_demo.jpg (326x413)
+2025-11-12 22:00:52,340 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 22:00:52,341 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:52] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:52,345 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 22:00:52,400 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 22:00:53,099 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 22:00:53,100 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:53] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:53,414 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 22:00:53,475 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (326x413)
+2025-11-12 22:00:54,443 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 22:00:54,444 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:54] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:54,449 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:54] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:54,763 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 22:00:54,816 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 22:00:55,566 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 22:00:55,567 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:55] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:00:55,571 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 22:00:55,633 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 22:00:56,315 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 22:00:56,316 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:00:56] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 22:01:10,126 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:01:10,178 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:01:10,181 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:01:10] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:01:10,369 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:01:10,423 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:01:10,425 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:01:10] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:01:10,970 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:01:11,016 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:01:11,018 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:01:11] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:01:55,676 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:01:55,733 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:01:55,737 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:01:55] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:02:09,972 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:02:10,032 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:02:10,035 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:02:10] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:02:11,114 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:02:11,171 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:02:11,173 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:02:11] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:02:11,759 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 22:02:11,807 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 22:02:11,809 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 22:02:11] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 22:09:53,766 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 22:09:53,766 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 22:09:54,361 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 22:09:54,449 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 22:09:54,540 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 22:09:54,630 - __main__ - INFO - Face model loaded successfully
+2025-11-12 22:09:54,636 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 22:09:54,636 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 22:09:54,666 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 22:09:54,666 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 22:09:54,669 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 22:09:58,111 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 22:09:58,112 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 22:09:58,374 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 22:09:58,436 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 22:09:58,515 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 22:09:58,577 - __main__ - INFO - Face model loaded successfully
+2025-11-12 22:09:58,582 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 22:09:58,582 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 22:09:58,596 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 22:09:58,608 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 23:21:59,448 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 23:21:59,449 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 23:22:00,100 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 23:22:00,202 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 23:22:00,310 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 23:22:00,422 - __main__ - INFO - Face model loaded successfully
+2025-11-12 23:22:00,436 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 23:22:00,437 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 23:22:12,792 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.106:5000
+2025-11-12 23:22:12,793 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-12 23:22:12,796 - werkzeug - INFO -  * Restarting with stat
+2025-11-12 23:22:16,237 - __main__ - INFO - Device: cpu | half: False
+2025-11-12 23:22:16,237 - __main__ - INFO - Loading pothole model: D:\Volks\Hazard_detection\YOLOv8_Small_RDD.pt
+2025-11-12 23:22:16,407 - __main__ - INFO - Pothole model loaded successfully
+2025-11-12 23:22:16,460 - __main__ - INFO - Hazard model loaded successfully
+2025-11-12 23:22:16,531 - __main__ - INFO - Plate model loaded successfully
+2025-11-12 23:22:16,598 - __main__ - INFO - Face model loaded successfully
+2025-11-12 23:22:16,604 - __main__ - INFO - Starting Flask backend for Road Hazard Detection
+2025-11-12 23:22:16,604 - __main__ - INFO - Models loaded - Pothole: True, Hazard: True, Plate: True, Face: True
+2025-11-12 23:22:16,617 - werkzeug - WARNING -  * Debugger is active!
+2025-11-12 23:22:16,630 - werkzeug - INFO -  * Debugger PIN: 486-847-884
+2025-11-12 23:22:16,662 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 23:22:16,827 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 23:22:16,830 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:16] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 23:22:16,833 - __main__ - INFO - Loading demo images from path: None
+2025-11-12 23:22:16,887 - __main__ - INFO - Loaded 7 valid demo images
+2025-11-12 23:22:16,889 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:16] "GET /get_demo_images HTTP/1.1" 200 -
+2025-11-12 23:22:20,372 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:20] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:20,636 - __main__ - INFO - Processing demo image: pothole_demo.jpg from path: None
+2025-11-12 23:22:20,696 - __main__ - INFO - Processing demo image: pothole_demo.jpg (614x403)
+2025-11-12 23:22:22,149 - __main__ - INFO - Demo processing completed: 2 detections found
+2025-11-12 23:22:22,150 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:22] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:22,154 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg from path: None
+2025-11-12 23:22:22,211 - __main__ - INFO - Processing demo image: stalled_vehicle_demo.jpg (651x411)
+2025-11-12 23:22:23,025 - __main__ - INFO - Demo processing completed: 0 detections found
+2025-11-12 23:22:23,027 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:23] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:23,344 - __main__ - INFO - Processing demo image: speed_breaker_demo.jpg from path: None
+2025-11-12 23:22:23,394 - __main__ - INFO - Processing demo image: speed_breaker_demo.jpg (326x413)
+2025-11-12 23:22:24,378 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 23:22:24,379 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:24] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:24,382 - __main__ - INFO - Processing demo image: manhole_demo.jpg from path: None
+2025-11-12 23:22:24,438 - __main__ - INFO - Processing demo image: manhole_demo.jpg (499x266)
+2025-11-12 23:22:25,107 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 23:22:25,108 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:25] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:25,414 - __main__ - INFO - Processing demo image: Aligator_demo.jpg from path: None
+2025-11-12 23:22:25,463 - __main__ - INFO - Processing demo image: Aligator_demo.jpg (326x413)
+2025-11-12 23:22:26,369 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 23:22:26,371 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:26] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:26,376 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:26] "OPTIONS /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:26,693 - __main__ - INFO - Processing demo image: face_blur_demo.jpg from path: None
+2025-11-12 23:22:26,744 - __main__ - INFO - Processing demo image: face_blur_demo.jpg (529x295)
+2025-11-12 23:22:27,504 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 23:22:27,505 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:27] "POST /process_demo HTTP/1.1" 200 -
+2025-11-12 23:22:27,512 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg from path: None
+2025-11-12 23:22:27,567 - __main__ - INFO - Processing demo image: plate_blur_demo.jpg (711x373)
+2025-11-12 23:22:28,288 - __main__ - INFO - Demo processing completed: 1 detections found
+2025-11-12 23:22:28,289 - werkzeug - INFO - 127.0.0.1 - - [12/Nov/2025 23:22:28] "POST /process_demo HTTP/1.1" 200 -

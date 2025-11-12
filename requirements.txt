@@ -1,0 +1,23 @@
+Flask==3.0.3
+flask-cors==4.0.1
+gunicorn==22.0.0
+
+# YOLO and Object Detection
+ultralytics==8.2.77
+torch==2.4.1
+torchvision==0.19.1
+
+# Image & Video Processing
+opencv-python==4.10.0.84
+numpy==1.26.4
+Pillow==10.4.0
+
+# Cloud / Messaging (optional)
+pika==1.3.2           # for RabbitMQ / CloudAMQP
+requests==2.32.3
+paho-mqtt==2.1.0
+
+# Utility and performance
+tqdm==4.66.5
+psutil==6.0.0
+Werkzeug==3.0.4
