@@ -4,8 +4,8 @@ gunicorn==22.0.0
 
 # YOLO and Object Detection
 ultralytics==8.2.77
-torch==2.5.0
-torchvision
+torch==2.4.1
+torchvision==0.19.1
 
 # Image & Video Processing
 opencv-python==4.10.0.84
@@ -27,5 +27,4 @@ opencv-python
 pillow 
 plotly 
 pandas
-Flask==3.0.3
-pipdeptree
+torch
